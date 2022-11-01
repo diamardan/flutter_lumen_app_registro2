@@ -1,4 +1,4 @@
-package com.identaflix.cetis32_app_registro
+package com.identaflix.lumen_app_registro
 
 import android.content.Context
 import android.os.Bundle

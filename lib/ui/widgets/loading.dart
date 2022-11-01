@@ -1,4 +1,4 @@
-import 'package:cetis32_app_registro/ui/res/colors.dart';
+import 'package:lumen_app_registro/ui/res/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 

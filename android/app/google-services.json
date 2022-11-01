@@ -1,31 +1,40 @@
 {
     "project_info": {
-        "project_number": "1015698783853",
-        "project_id": "smart-school-39135",
-        "storage_bucket": "smart-school-39135.appspot.com"
+      "project_number": "1015698783853",
+      "firebase_url": "https://smart-school-39135-default-rtdb.firebaseio.com",
+      "project_id": "smart-school-39135",
+      "storage_bucket": "smart-school-39135.appspot.com"
     },
-    "client": [{
+    "client": [
+      {
         "client_info": {
-            "mobilesdk_app_id": "1:1015698783853:android:a976f7bc39f8632924c964",
-            "android_client_info": {
-                "package_name": "com.identaflix.cetis32_app_registro"
-            }
+          "mobilesdk_app_id": "1:1015698783853:android:f49e66ab537ebc2424c964",
+          "android_client_info": {
+            "package_name": "com.identaflix.lumen_app_registro"
+          }
         },
-        "oauth_client": [{
+        "oauth_client": [
+          {
             "client_id": "1015698783853-acugnmf3ack93amsq5tjbcvr1b0012dv.apps.googleusercontent.com",
             "client_type": 3
-        }],
-        "api_key": [{
+          }
+        ],
+        "api_key": [
+          {
             "current_key": "AIzaSyBDJOO0z9m85TP3ljfdJTQxbJUwVc0CnOU"
-        }],
+          }
+        ],
         "services": {
-            "appinvite_service": {
-                "other_platform_oauth_client": [{
-                    "client_id": "1015698783853-acugnmf3ack93amsq5tjbcvr1b0012dv.apps.googleusercontent.com",
-                    "client_type": 3
-                }]
-            }
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "1015698783853-acugnmf3ack93amsq5tjbcvr1b0012dv.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
         }
-    }],
+      }
+    ],
     "configuration_version": "1"
-}
+  }

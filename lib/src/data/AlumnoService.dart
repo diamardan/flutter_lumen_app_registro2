@@ -3,9 +3,9 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:cetis32_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
 import 'package:mime_type/mime_type.dart';
-import 'package:cetis32_app_registro/src/utils/net_util.dart';
+import 'package:lumen_app_registro/src/utils/net_util.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 

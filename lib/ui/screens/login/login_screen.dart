@@ -1,13 +1,13 @@
 import 'package:barcode_scan2/platform_wrapper.dart';
-import 'package:cetis32_app_registro/src/controllers/SignIn/SignInQRController.dart';
-import 'package:cetis32_app_registro/ui/res/design_constants.dart';
-import 'package:cetis32_app_registro/ui/screens/login/login_email_screen.dart';
-import 'package:cetis32_app_registro/ui/screens/login/recovery_screen.dart';
-import 'package:cetis32_app_registro/ui/screens/login/request_password.dart';
-import 'package:cetis32_app_registro/ui/screens/preregistro/create_form.dart';
-import 'package:cetis32_app_registro/ui/res/notify_ui.dart';
-import 'package:cetis32_app_registro/ui/widgets/loading.dart';
-import 'package:cetis32_app_registro/ui/widgets/whatsapp_button.dart';
+import 'package:lumen_app_registro/src/controllers/SignIn/SignInQRController.dart';
+import 'package:lumen_app_registro/ui/res/design_constants.dart';
+import 'package:lumen_app_registro/ui/screens/login/login_email_screen.dart';
+import 'package:lumen_app_registro/ui/screens/login/recovery_screen.dart';
+import 'package:lumen_app_registro/ui/screens/login/request_password.dart';
+import 'package:lumen_app_registro/ui/screens/preregistro/create_form.dart';
+import 'package:lumen_app_registro/ui/res/notify_ui.dart';
+import 'package:lumen_app_registro/ui/widgets/loading.dart';
+import 'package:lumen_app_registro/ui/widgets/whatsapp_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -240,8 +240,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Image.asset(
                 'assets/img/logo-3.png',
-                color: AppColors.primary,
                 width: 120,
+                fit: BoxFit.contain,
               ),
               SizedBox(
                 height: 30,

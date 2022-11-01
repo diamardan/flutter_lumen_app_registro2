@@ -6,13 +6,13 @@ class AppConstants {
   //static const whatsappNumber = '+5215520779800';
   static const whatsappNumber = '+5215561146039';
   static const supportNumber = '5561146039';
-  static const whatsappText = 'Hola me comunico del Cetis 32';
+  static const whatsappText = 'Hola me comunico de Lumen';
   static const pdfPagoUrl =
       "https://escuelas.identaflix.com/public/pdfs/LUMEN%20FORMATO%20PAGO.pdf";
   static const urlAttendance = "https://attendance-lumen.web.app/";
   static const urlAttendanceIdPosition = 33;
   //fsCollectionName almacena el nombre de la collection que hace referencia a la escuela sobre la que se va a trabajar
-  static const fsCollectionName = "cetis32";
+  static const fsCollectionName = "lumen";
   //éste link es el de la carpeta del google drive credenciales
   static const gdriveUrl =
       "https://drive.google.com/drive/folders/1u06DdjAA3RxWwc7EyYGWjia_gxLBNHhS?usp=sharing";

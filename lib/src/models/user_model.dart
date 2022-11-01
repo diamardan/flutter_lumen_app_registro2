@@ -61,7 +61,7 @@ class Registration {
         sex: json["sexo"],
         password: json["password"],
         fotoUsuarioDrive: json["foto_usuario_drive"],
-        idbio: json["idbio"],
+        idbio: json["idbio"] is int ? json["idbio"] : int.parse(json["idbio"]),
         qrDrive: json["qr_drive"],
         firmaDrive: json["firma_drive"],
         fecha_registro: json["fecha_registro"],
@@ -71,7 +71,8 @@ class Registration {
 
   @override
   String toString() {
-    var strOutput = ''' id $id 
+    var strOutput =
+        ''' id $id 
             name: $name  
             surnames $surnames   
             curp: $curp  

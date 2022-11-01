@@ -1,6 +1,6 @@
-import 'package:cetis32_app_registro/ui/res/colors.dart';
-import 'package:cetis32_app_registro/ui/screens/access/register_access/get_face.dart';
-import 'package:cetis32_app_registro/ui/widgets/access_button.dart';
+/* import 'package:lumen_app_registro/ui/res/colors.dart';
+import 'package:lumen_app_registro/ui/screens/access/register_access/get_face.dart';
+import 'package:lumen_app_registro/ui/widgets/access_button.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +23,7 @@ class _RegisterAccessState extends State<RegisterAccess> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _header(), body: _biometrics());
+    return Scaffold/*  */(appBar: _header(), body: _biometrics());
   }
 
   Widget _header() => AppBar(
@@ -98,3 +98,4 @@ class _RegisterAccessState extends State<RegisterAccess> {
     );
   }
 }
+ */

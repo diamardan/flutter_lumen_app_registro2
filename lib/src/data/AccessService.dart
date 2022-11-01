@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/models/acceses_model.dart';
-import 'package:cetis32_app_registro/src/utils/net_util.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/models/acceses_model.dart';
+import 'package:lumen_app_registro/src/utils/net_util.dart';
 import 'package:http/http.dart' as http;
 
 class AccessService {
   getAll() async {
-    String endpoint = AppConstants.backendUrl + '/cetis32/accesos/getAll';
+    String endpoint = AppConstants.backendUrl + '/lumen/accesos/getAll';
     var uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
@@ -26,7 +26,7 @@ class AccessService {
   }
 
   getAllById(String idbio) async {
-    String endpoint = AppConstants.backendUrl + '/cetis32/accesos/getAllById';
+    String endpoint = AppConstants.backendUrl + '/lumen/accesos/getAllById';
     var uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"

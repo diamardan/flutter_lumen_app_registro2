@@ -1,4 +1,4 @@
-import 'package:cetis32_app_registro/src/utils/routes_arguments.dart';
+import 'package:lumen_app_registro/src/utils/routes_arguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

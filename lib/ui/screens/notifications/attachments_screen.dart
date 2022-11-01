@@ -1,6 +1,6 @@
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/data/MessagingService.dart';
-import 'package:cetis32_app_registro/ui/widgets/download_attachments.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/data/MessagingService.dart';
+import 'package:lumen_app_registro/ui/widgets/download_attachments.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,7 +38,7 @@ class _AttachmentsScreenState extends State<AttachmentsScreen> {
   _launchURL(String fileName) async {
     fileName = fileName.replaceAll(" ", "-");
     var url =
-        '${AppConstants.backendPublicUrl}/uploads/cetis32/attachments/heap/${widget.messageId}/$fileName';
+        '${AppConstants.backendPublicUrl}/uploads/${AppConstants.fsCollectionName}/attachments/heap/${widget.messageId}/$fileName';
     //"https://api.escuelas.infon.mx/public/uploads/cetis32/attachments/heap/${widget.messageId}/$fileName";
     print(url);
     if (await canLaunch(url)) {

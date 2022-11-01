@@ -1,4 +1,4 @@
-import 'package:cetis32_app_registro/ui/screens/login/login_screen.dart';
+import 'package:lumen_app_registro/ui/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../login/login_screen.dart';

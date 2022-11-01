@@ -1,7 +1,7 @@
-import 'package:cetis32_app_registro/src/data/LogService.dart';
-import 'package:cetis32_app_registro/src/data/MessagingService.dart';
-import 'package:cetis32_app_registro/src/models/notification_model.dart';
-import 'package:cetis32_app_registro/ui/res/local_motifications.dart';
+import 'package:lumen_app_registro/src/data/LogService.dart';
+import 'package:lumen_app_registro/src/data/MessagingService.dart';
+import 'package:lumen_app_registro/src/models/notification_model.dart';
+import 'package:lumen_app_registro/ui/res/local_motifications.dart';
 import 'package:flutter_geofence/geofence.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +23,4 @@ class GeoAccessService {
       MessagingService().addNotification("333333333333333333", Notification());
     });
   }
-
- 
 }

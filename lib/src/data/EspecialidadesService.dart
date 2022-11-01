@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/utils/net_util.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/utils/net_util.dart';
 
 class EspecialidadesService {
   getAll() async {

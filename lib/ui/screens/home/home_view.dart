@@ -1,7 +1,7 @@
-import 'package:cetis32_app_registro/ui/res/colors.dart';
-import 'package:cetis32_app_registro/ui/screens/home/popup_menu_widget.dart';
-//import 'package:cetis32_app_registro/src/screens/home/popup_menu_widget.dart';
-import 'package:cetis32_app_registro/ui/widgets/whatsapp_button.dart';
+import 'package:lumen_app_registro/ui/res/colors.dart';
+import 'package:lumen_app_registro/ui/screens/home/popup_menu_widget.dart';
+//import 'package:lumen_app_registro/src/screens/home/popup_menu_widget.dart';
+import 'package:lumen_app_registro/ui/widgets/whatsapp_button.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/menu_button2.dart';
@@ -85,16 +85,14 @@ class HomeView extends StatelessWidget {
                     width: 20,
                   ),
                   Image.asset(
-                    'assets/img/logo-3.png',
-                    color:
-                        Colors.white.withOpacity(0.8), //AppColors.morenaColor,
+                    'assets/img/logo.png',
                     width: 40,
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
-                    "CETIS 32",
+                    "LUMEN",
                     textAlign: TextAlign.center,
                     style: headerFont,
                     maxLines: 2,
@@ -160,7 +158,7 @@ class HomeView extends StatelessWidget {
               title: "Credencial Inteligente",
               // subtitle: "Descarga tu credencial escolar.",
               icon: Icons.ad_units_outlined,
-              route: "credential"),
+              route: "lumen-credential"),
           SizedBox(
               //   height: 12,
               ),

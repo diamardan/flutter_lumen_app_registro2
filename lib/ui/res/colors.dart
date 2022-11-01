@@ -21,8 +21,8 @@ class AppColors {
   //static const primary = Color(0XFF6a1b31);
   static const darkPrimary = Color(0XFF6a1b31);
   static const lightPrimary = Color(0XFF85334b);
-  static const primary = Color(0XFF621152);
-  static const secondary = Color(0XFFBAAC5F);
+  static const primary = Color.fromARGB(255, 6, 129, 0);
+  static const secondary = Color.fromARGB(255, 218, 190, 34);
   static const background = Color(0XFAF5F5F5);
   static const greyButton = Color(0xAA9E9E9E);
   static const onPrimary = Color(0XFFFFFFFFF);

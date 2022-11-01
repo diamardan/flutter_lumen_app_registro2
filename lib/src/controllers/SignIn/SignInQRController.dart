@@ -1,6 +1,6 @@
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:cetis32_app_registro/src/controllers/SignIn/SignInController.dart';
-import 'package:cetis32_app_registro/src/models/user_model.dart';
+import 'package:lumen_app_registro/src/controllers/SignIn/SignInController.dart';
+import 'package:lumen_app_registro/src/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_tools/qr_code_tools.dart';
 

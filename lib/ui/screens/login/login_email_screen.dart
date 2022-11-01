@@ -1,9 +1,9 @@
-import 'package:cetis32_app_registro/src/controllers/SignIn/SignInEmailController.dart';
-import 'package:cetis32_app_registro/ui/screens/login/recovery_screen.dart';
-import 'package:cetis32_app_registro/ui/screens/login/request_password.dart';
-import 'package:cetis32_app_registro/ui/res/notify_ui.dart';
-import 'package:cetis32_app_registro/src/utils/validator.dart';
-import 'package:cetis32_app_registro/ui/widgets/loading.dart';
+import 'package:lumen_app_registro/src/controllers/SignIn/SignInEmailController.dart';
+import 'package:lumen_app_registro/ui/screens/login/recovery_screen.dart';
+import 'package:lumen_app_registro/ui/screens/login/request_password.dart';
+import 'package:lumen_app_registro/ui/res/notify_ui.dart';
+import 'package:lumen_app_registro/src/utils/validator.dart';
+import 'package:lumen_app_registro/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../res/colors.dart';

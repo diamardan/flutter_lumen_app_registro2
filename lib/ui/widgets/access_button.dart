@@ -1,7 +1,7 @@
-import 'package:cetis32_app_registro/ui/res/colors.dart';
-import 'package:cetis32_app_registro/ui/screens/access/register_access/get_face.dart';
-import 'package:cetis32_app_registro/ui/screens/access/register_access/get_signature.dart';
-import 'package:cetis32_app_registro/src/utils/routes_arguments.dart';
+/* import 'package:lumen_app_registro/ui/res/colors.dart';
+import 'package:lumen_app_registro/ui/screens/access/register_access/get_face.dart';
+import 'package:lumen_app_registro/ui/screens/access/register_access/get_signature.dart';
+import 'package:lumen_app_registro/src/utils/routes_arguments.dart';
 import "package:flutter/material.dart";
 
 class AccessButton extends StatelessWidget {
@@ -61,3 +61,4 @@ class AccessButton extends StatelessWidget {
             ])));
   }
 }
+ */

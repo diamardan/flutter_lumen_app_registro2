@@ -1,4 +1,4 @@
-import 'package:cetis32_app_registro/src/utils/enums.dart';
+import 'package:lumen_app_registro/src/utils/enums.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

@@ -1,5 +1,5 @@
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/models/user_model.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/models/user_model.dart';
 
 final school = AppConstants.fsCollectionName;
 

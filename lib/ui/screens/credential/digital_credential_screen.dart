@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:cetis32_app_registro/src/models/user_model.dart';
-import 'package:cetis32_app_registro/src/provider/user_provider.dart';
-import 'package:cetis32_app_registro/ui/res/colors.dart';
-import 'package:cetis32_app_registro/ui/screens/credential/render_crendetial_screen.dart';
-import 'package:cetis32_app_registro/src/utils/imageUtil.dart';
-import 'package:cetis32_app_registro/src/utils/widget_to_image.dart';
+import 'package:lumen_app_registro/src/models/user_model.dart';
+import 'package:lumen_app_registro/src/provider/user_provider.dart';
+import 'package:lumen_app_registro/ui/res/colors.dart';
+import 'package:lumen_app_registro/ui/screens/credential/render_crendetial_screen.dart';
+import 'package:lumen_app_registro/src/utils/imageUtil.dart';
+import 'package:lumen_app_registro/src/utils/widget_to_image.dart';
 import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // for date format

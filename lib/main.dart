@@ -1,10 +1,10 @@
-import 'package:cetis32_app_registro/app.dart';
-import 'package:cetis32_app_registro/fcm/fcm_service.dart';
-import 'package:cetis32_app_registro/geo_access/GeoAccessService.dart';
-import 'package:cetis32_app_registro/src/models/notification_model.dart'
+import 'package:lumen_app_registro/app.dart';
+import 'package:lumen_app_registro/fcm/fcm_service.dart';
+import 'package:lumen_app_registro/geo_access/GeoAccessService.dart';
+import 'package:lumen_app_registro/src/models/notification_model.dart'
     as nm_app;
-import 'package:cetis32_app_registro/src/data/MessagingService.dart';
-import 'package:cetis32_app_registro/ui/res/local_motifications.dart';
+import 'package:lumen_app_registro/src/data/MessagingService.dart';
+import 'package:lumen_app_registro/ui/res/local_motifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

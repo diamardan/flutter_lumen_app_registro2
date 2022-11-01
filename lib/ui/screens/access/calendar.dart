@@ -1,9 +1,9 @@
 import 'dart:collection';
 
-import 'package:cetis32_app_registro/src/models/acceses_model.dart';
-import 'package:cetis32_app_registro/src/models/user_model.dart';
-import 'package:cetis32_app_registro/src/provider/user_provider.dart';
-import 'package:cetis32_app_registro/src/data/AccessService.dart';
+import 'package:lumen_app_registro/src/models/acceses_model.dart';
+import 'package:lumen_app_registro/src/models/user_model.dart';
+import 'package:lumen_app_registro/src/provider/user_provider.dart';
+import 'package:lumen_app_registro/src/data/AccessService.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';

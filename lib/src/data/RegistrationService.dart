@@ -1,6 +1,6 @@
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/models/user_model.dart';
-import 'package:cetis32_app_registro/src/data/SharedService.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/models/user_model.dart';
+import 'package:lumen_app_registro/src/data/SharedService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 const school = AppConstants.fsCollectionName;

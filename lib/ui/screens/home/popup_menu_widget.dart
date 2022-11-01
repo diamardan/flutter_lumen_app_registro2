@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/controllers/SignIn/SignInController.dart';
-import 'package:cetis32_app_registro/ui/res/notify_ui.dart';
-import 'package:cetis32_app_registro/ui/widgets/logout_dialog.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/controllers/SignIn/SignInController.dart';
+import 'package:lumen_app_registro/ui/res/notify_ui.dart';
+import 'package:lumen_app_registro/ui/widgets/logout_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

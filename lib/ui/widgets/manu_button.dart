@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
-import 'package:cetis32_app_registro/src/utils/routes_arguments.dart';
-import 'package:cetis32_app_registro/ui/res/colors.dart';
+import 'package:lumen_app_registro/src/utils/routes_arguments.dart';
+import 'package:lumen_app_registro/ui/res/colors.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 

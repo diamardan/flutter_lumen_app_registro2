@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:cetis32_app_registro/src/data/MessagingService.dart';
-import 'package:cetis32_app_registro/ui/res/local_motifications.dart';
+import 'package:lumen_app_registro/src/data/MessagingService.dart';
+import 'package:lumen_app_registro/ui/res/local_motifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../src/provider/supscritions_provider.dart';
-import 'package:cetis32_app_registro/src/models/notification_model.dart' as app;
+import 'package:lumen_app_registro/src/models/notification_model.dart' as app;
 
 extension StreamSubscriptionState on StreamSubscription {
   void addToState(BuildContext context) {

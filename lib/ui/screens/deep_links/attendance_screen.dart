@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cetis32_app_registro/src/constants/constants.dart';
-import 'package:cetis32_app_registro/src/data/SharedService.dart';
+import 'package:lumen_app_registro/src/constants/constants.dart';
+import 'package:lumen_app_registro/src/data/SharedService.dart';
 import 'package:location/location.dart';
-import 'package:cetis32_app_registro/src/utils/attendance.dart';
+import 'package:lumen_app_registro/src/utils/attendance.dart';
 
 class AttendanceLinkScreen extends StatefulWidget {
   const AttendanceLinkScreen({this.key, this.urlString}) : super(key: key);
