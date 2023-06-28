@@ -48,7 +48,7 @@ class FCMService {
         LocalNotificationsService().showNotification(
             notification.hashCode, notification.title, notification.body);
         app.Notification appNotification = _getNotificationObject(message);
-        _messagingService.addNotification(userId, appNotification);
+        //_messagingService.addNotification(userId, appNotification);
       }
     }).addToState(context);
   }

@@ -117,7 +117,7 @@ class _AttendanceLinkScreenState extends State<AttendanceLinkScreen> {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
+            ElevatedButton(
               child: Text('Aceptar'),
               onPressed: () {
                 Navigator.of(context).pop();

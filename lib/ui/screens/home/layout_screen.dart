@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:lumen_app_registro/fcm/fcm_service.dart';
 import 'package:lumen_app_registro/src/constants/constants.dart';
 import 'package:lumen_app_registro/src/controllers/SignIn/SignInController.dart';
@@ -15,8 +16,11 @@ import 'package:lumen_app_registro/ui/widgets/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../res/notify_ui.dart';
 
 class LayoutScreen extends StatefulWidget {
   @override
@@ -130,6 +134,33 @@ class _homeScreenState extends State<LayoutScreen> {
       return true;
   }
 
+  enviarWhatsapp(BuildContext _context) async {
+    var url =
+        "whatsapp://send?phone=${AppConstants.whatsappNumber}&text=${AppConstants.whatsappText}, ";
+    /* var url =
+        "${AppConstants.whatsappNumber}?text=${AppConstants.whatsappText}"; */
+    if (Platform.isIOS) {
+      print('ios1');
+      if (await canLaunch('whatsapp://')) {
+        await launch(
+            Uri.encodeFull(
+                "whatsapp://wa.me/${AppConstants.whatsappNumber}?text=${AppConstants.whatsappText},"),
+            forceSafariVC: false);
+      } else {
+        print('android');
+
+        await launch(url, forceSafariVC: true);
+      }
+    } else {
+      await canLaunch(url)
+          ? launch(url)
+          : await NotifyUI.showBasic(
+              _context, 'Aviso', 'WhatsApp no instalado');
+    }
+    /* await launch(
+        "${AppConstants.whatsappNumber}?text=${AppConstants.whatsappText}"); */
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -137,17 +168,17 @@ class _homeScreenState extends State<LayoutScreen> {
         child: CustomLoading(
             inAsyncCall: user == null,
             child: Scaffold(
-                body: IndexedStack(
-                  index: _selectedIndex,
-                  children: [
-                    HomeView(),
-                    user != null ? NotificationsScreen() : Container(),
-                    NewsView()
-                  ],
-                ),
-                bottomNavigationBar: _bottomNavBar()
-                //bottomNavBar(),
-                )));
+              body: IndexedStack(
+                index: _selectedIndex,
+                children: [
+                  HomeView(),
+                  user != null ? NotificationsScreen() : Container(),
+                  NewsView()
+                ],
+              ),
+              //bottomNavigationBar: _bottomNavBar()
+              //bottomNavBar(),
+            )));
   }
 
   _bottomNavBar() {

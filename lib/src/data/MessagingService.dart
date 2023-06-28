@@ -16,6 +16,15 @@ class MessagingService {
     //print(topicsNames.toString());
 
     /* FCM subscriptions to topics */
+    print(subscription.careerTopic.toString());
+    print(subscription.gradeTopic.toString());
+
+    print(subscription.groupTopic.toString());
+
+    print(subscription.turnTopic.toString());
+
+    print(subscription.schoolTopic.toString());
+
     if (subscription.careerTopic != "none")
       messaging.subscribeToTopic(subscription.careerTopic);
     if (subscription.gradeTopic != "none")
@@ -72,7 +81,7 @@ class MessagingService {
         .update({"fcm_topics": []});
   }
 
-  addNotification(String docId, Notification notification) {
+  /* addNotification(String docId, Notification notification) {
     firestore
         .collection("schools")
         .doc(school)
@@ -81,7 +90,7 @@ class MessagingService {
         .collection("notifications")
         .doc(notification.messageId)
         .set(notification.toJson());
-  }
+  } */
 
   Future<Map<String, dynamic>> getMessage(String messageId) async {
     try {

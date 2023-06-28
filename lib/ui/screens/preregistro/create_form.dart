@@ -13,7 +13,7 @@ import 'package:lumen_app_registro/src/data/TurnosService.dart';
 import 'package:lumen_app_registro/src/utils/txtFormater.dart';
 import 'package:lumen_app_registro/src/utils/validator.dart';
 import 'package:signature/signature.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+//import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../res/colors.dart';
 
@@ -618,12 +618,12 @@ class _PreregFormState extends State<PreregForm> {
                     padding: EdgeInsets.all(0),
                     minWidth: 10,
                     onPressed: () {
-                      showMaterialModalBottomSheet(
+                      /* showMaterialModalBottomSheet(
                         expand: false,
                         useRootNavigator: true,
                         context: context,
                         builder: (_) => _loadImageOptions("voucher"),
-                      );
+                      ); */
                       //_tomarVoucher();
                       /* setState(() {
                         _loading = false;
@@ -667,11 +667,11 @@ class _PreregFormState extends State<PreregForm> {
                     padding: EdgeInsets.all(0),
                     minWidth: 10,
                     onPressed: () {
-                      showMaterialModalBottomSheet(
+                      /* showMaterialModalBottomSheet(
                         expand: false,
                         context: context,
                         builder: (_) => _loadImageOptions("photo"),
-                      );
+                      ); */
                       /* _tomarFoto(); */
                       /* setState(() {
                         _loading = true;

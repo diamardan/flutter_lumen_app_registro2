@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../constants/constants.dart';
+
 class Registration {
   String id;
   String name;
@@ -66,13 +68,13 @@ class Registration {
         firmaDrive: json["firma_drive"],
         fecha_registro: json["fecha_registro"],
         devices: json["devices"] ?? [],
-        maxDevicesAllowed: json["max_devices_allowed"] ?? 3,
+        maxDevicesAllowed:
+            json["max_devices_allowed"] ?? AppConstants.max_devices_allowed,
       );
 
   @override
   String toString() {
-    var strOutput =
-        ''' id $id 
+    var strOutput = ''' id $id 
             name: $name  
             surnames $surnames   
             curp: $curp  

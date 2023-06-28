@@ -39,10 +39,10 @@ class _WhatsappHelpBtnState extends State<WhatsappHelpBtn> {
             SizedBox(
               width: 10,
             ),
-            Text(
+            /* Text(
               'Ayuda',
               style: TextStyle(color: Colors.white.withOpacity(0.8)),
-            )
+            ) */
           ],
         ),
       ),

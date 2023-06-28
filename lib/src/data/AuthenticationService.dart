@@ -78,8 +78,7 @@ class AuthenticationService {
   }
 
   sendPassword(String email, String password) async {
-    String endpoint =
-        'https://api.escuelas.infon.mx/api/v1/auth-app/sendPassword';
+    String endpoint = '${AppConstants.backendBaseUrl}auth-app/sendPassword';
     var uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
@@ -100,8 +99,7 @@ class AuthenticationService {
   }
 
   remindPassword(String email, String password) async {
-    String endpoint =
-        'https://api.escuelas.infon.mx/api/v1/auth-app/remindPassword';
+    String endpoint = '${AppConstants.backendBaseUrl}auth-app/remindPassword';
     var uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"

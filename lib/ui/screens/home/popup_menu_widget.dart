@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:lumen_app_registro/src/constants/constants.dart';
 import 'package:lumen_app_registro/src/controllers/SignIn/SignInController.dart';
+import 'package:lumen_app_registro/src/models/user_model.dart';
 import 'package:lumen_app_registro/ui/res/notify_ui.dart';
 import 'package:lumen_app_registro/ui/widgets/logout_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:lumen_app_registro/src/utils/auth_sign_psw.dart';
 
 import '../../../src/data/AuthenticationService.dart';
 
@@ -22,6 +24,7 @@ popupMenu() {
       //  _settingsItem(context2),
       // _profileItem(context2),
       _myDevicesItem(context2),
+      _changePassword(context2),
       //  _whatsapp(context2),
       _logoutItem(context2),
     ],
@@ -44,6 +47,31 @@ PopupMenuItem _settingsItem(BuildContext ctx) {
       ],
     ),
   );
+}
+
+PopupMenuItem _changePassword(BuildContext ctx) {
+  Registration user;
+  return /* user.qrDrive != "email"
+      ? Container()
+      :  */
+      PopupMenuItem(
+          /* onTap: () {
+            Future.delayed(Duration(seconds: 0),
+                () => Navigator.pushNamed(ctx, "change-password"));
+          }, */
+          child: Row(children: [
+    Icon(
+      Icons.phone_android_rounded,
+      color: Colors.black,
+    ),
+    TextButton(
+        onPressed: () {
+          //AuthSignPassword.changePassword(ctx);
+        },
+        child: Text(
+          "Cambiar contraseña",
+        ))
+  ]));
 }
 
 PopupMenuItem _profileItem(BuildContext ctx) {
@@ -113,7 +141,7 @@ PopupMenuItem _whatsapp(BuildContext ctx) {
     child: Row(
       children: [
         Icon(
-          Icons.whatsapp_rounded,
+          Icons.help,
           color: Colors.black,
         ),
         Text("  Ayuda Whatsapp"),

@@ -1,7 +1,6 @@
 import 'package:lumen_app_registro/src/models/user_model.dart';
 import 'package:lumen_app_registro/src/provider/user_provider.dart';
 import 'package:lumen_app_registro/src/data/registrationService.dart';
-import 'package:lumen_app_registro/src/utils/auth_sign_psw.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                        _blockInfo("Idbio", user.idbio.toString()),
                         _blockInfo("Apellidos:",
                             "${user.surnames ?? "No disponible"}"),
                         _blockInfo(
@@ -66,7 +66,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         _blockInfo("Turno", user.turn),
                         _blockInfo("Correo", user.email),
                         _blockInfo("Celular", user.cellphone),
-                        user.accessMethod == "email"
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.network(
+                              'https://drive.google.com/uc?export=view&id=${user.fotoUsuarioDrive}',
+                              height: 120,
+                            ),
+                            Image.network(
+                              'https://drive.google.com/uc?export=view&id=${user.firmaDrive}',
+                            ),
+                            Image.network(
+                              'https://drive.google.com/uc?export=view&id=${user.qrDrive}',
+                            ),
+                          ],
+                        ),
+                        /* user.accessMethod == "email"
                             ? Center(
                                 child: Container(
                                     color: Colors.white70,
@@ -82,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.blue)))))
-                            : Container(),
+                            : Container(), */
                       ]))
                 : Container()),
       ),

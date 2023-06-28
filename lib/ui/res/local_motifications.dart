@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class LocalNotificationsService {
   static final LocalNotificationsService _notificationService =
@@ -19,8 +20,16 @@ class LocalNotificationsService {
     /* 'Este canal es utilizado para  recibir notificaciones escolares .', // description */
     importance: Importance.high,
   );
+  Future<void> requestPermission() async {
+    await Permission.notification.isDenied.then((value) {
+      if (value) {
+        Permission.notification.request();
+      }
+    });
+  }
 
   Future<void> init() async {
+    await requestPermission();
     // channel for heads up notifications
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<

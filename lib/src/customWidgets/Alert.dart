@@ -65,7 +65,7 @@ showAlertDialog(BuildContext context, String title, String message,
 
 showAlertPago(BuildContext context, String title, String message) {
   // Create button
-  Widget okButton = FlatButton(
+  Widget okButton = ElevatedButton(
     child: Text("OK"),
     onPressed: () {
       Navigator.push(
@@ -92,7 +92,7 @@ showAlertPago(BuildContext context, String title, String message) {
 }
 
 showCompletedDownload(BuildContext context, title, message) {
-  Widget okButton = FlatButton(
+  Widget okButton = ElevatedButton(
     child: Text("OK"),
     onPressed: () {
       Navigator.of(context).pop();

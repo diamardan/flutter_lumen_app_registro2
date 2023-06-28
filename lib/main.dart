@@ -27,9 +27,9 @@ Future<void> _messageHandler(RemoteMessage message) async {
 
     nm_app.Notification _notification =
         nm_app.Notification.fromRemoteMessage(message);
-    MessagingService().addNotification(userId, _notification);
-    LocalNotificationsService().showNotification(
-        notification.hashCode, notification.title, notification.body);
+    //MessagingService().addNotification(userId, _notification);
+    /* LocalNotificationsService().showNotification(
+        notification.hashCode, notification.title, notification.body); */
   }
 }
 

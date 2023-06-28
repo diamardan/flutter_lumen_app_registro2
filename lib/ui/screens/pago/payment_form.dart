@@ -101,7 +101,7 @@ class _PaymentFormState extends State<PaymentForm> {
     return new Container(
       width: 240,
       height: 48,
-      child: new RaisedButton(
+      child: new MaterialButton(
         child: new Text(
           'Pagar',
           style: new TextStyle(color: Colors.white),
@@ -117,7 +117,7 @@ class _PaymentFormState extends State<PaymentForm> {
     return new Container(
       width: 240,
       height: 48,
-      child: new RaisedButton(
+      child: new MaterialButton(
         child: new Text(
           'Get device session id',
           style: new TextStyle(color: Colors.white),

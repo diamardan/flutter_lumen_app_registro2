@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>INFON CETIS 32</string>
+	<string>LUMEN</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>cetis32_app_registro</string>
+	<string>lumen_app_registro</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -59,7 +61,7 @@
 	<key>NSMotionUsageDescription</key>
 	<string>Permitir el acceso al sensor de movimiento</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Necesito acceso a la galería</string>
+	<string>Para seleccionar el QR de inicio de sesión deberás permitir el acceso a la galería. Si no aceptas ésate permiso no podrás iniciar sesión por éste método.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Permitir el acceso al reconocimiento de voz</string>
 	<key>UILaunchStoryboardName</key>
@@ -82,6 +84,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>
 </plist>

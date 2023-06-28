@@ -52,24 +52,11 @@ class HomeView extends StatelessWidget {
         child: Container(
             color: AppColors.primary,
             child: Column(children: [
-              SizedBox(height: 40),
+              SizedBox(height: 15),
               Align(
                   alignment: Alignment.topRight,
                   child: Container(
                       child: Row(mainAxisSize: MainAxisSize.min, children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, "profile");
-                        },
-                        child: Container(
-                            child: CircleAvatar(
-                          radius: 17,
-                          backgroundColor: Colors.white,
-                          child: Icon(
-                            Icons.person,
-                            size: 30,
-                          ),
-                        ))),
                     SizedBox(
                       width: 10,
                     ),
@@ -79,24 +66,25 @@ class HomeView extends StatelessWidget {
                     )
                   ]))),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  /* SizedBox(
                     width: 20,
-                  ),
+                  ), */
                   Image.asset(
                     'assets/img/logo.png',
-                    width: 40,
+                    height: 80,
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
+                  /* Text(
                     "LUMEN",
                     textAlign: TextAlign.center,
                     style: headerFont,
                     maxLines: 2,
-                  )
+                  ) */
                 ],
               ),
               SizedBox(
@@ -137,10 +125,25 @@ class HomeView extends StatelessWidget {
               // height: 30,
               ),
           MenuButton2(
+            title: "Mi registro",
+            icon: Icons.developer_board,
+            route: "profile",
+          ),
+          MenuButton2(
+              title: "Credencial Inteligente",
+              // subtitle: "Descarga tu credencial escolar.",
+              icon: Icons.ad_units_outlined,
+              route: "lumen-credential"),
+          MenuButton2(
             title: "Accesos",
             icon: Icons.account_box_outlined,
             route: "access",
           ),
+          MenuButton2(
+              title: "Notificaciónes",
+              // subtitle: "Descarga tu credencial escolar.",
+              icon: Icons.notifications,
+              route: "notifications"),
           SizedBox(
               // height: 12,
               ),
@@ -154,25 +157,21 @@ class HomeView extends StatelessWidget {
           SizedBox(
               //  height: 12,
               ),*/
-          MenuButton2(
-              title: "Credencial Inteligente",
-              // subtitle: "Descarga tu credencial escolar.",
-              icon: Icons.ad_units_outlined,
-              route: "lumen-credential"),
+
           SizedBox(
               //   height: 12,
               ),
-          MenuButton2(
+          /* MenuButton2(
             title: "Recompensas",
             //subtitle: "Premios a la puntualidad y mas.",
             icon: Icons.star,
             route: "rewards",
             incoming: true,
-          ),
+          ), */
           SizedBox(
             height: 30,
           ),
-          WhatsappHelpBtn(context: ctx)
+          //WhatsappHelpBtn(context: ctx)
         ],
       )),
     );

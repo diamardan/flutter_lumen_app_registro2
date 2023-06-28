@@ -7,9 +7,9 @@ import 'package:lumen_app_registro/ui/res/colors.dart';
 import 'package:lumen_app_registro/ui/screens/credential/render_crendetial_screen.dart';
 import 'package:lumen_app_registro/src/utils/imageUtil.dart';
 import 'package:lumen_app_registro/src/utils/widget_to_image.dart';
-import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // for date format
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +30,8 @@ class _DigitalCredentialScreenState extends State<DigitalCredentialScreen> {
   Uint8List bytes2;
   bool visibleButton;
   Registration register;
+  String savePDFFolderName;
+
   @override
   void initState() {
     super.initState();
@@ -824,8 +826,8 @@ class _DigitalCredentialScreenState extends State<DigitalCredentialScreen> {
 // the downloads folder path
     //Directory output = await getDownloadsDirectory();
     // String tempPath = '/storage/emulated/0/Download';
-    String tempPath = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);
+    String tempPath = await getPublicExternalStorageDirectoryPath();
+
     String apellidos =
         register.surnames != null ? register.surnames : "SIN APELLIDOS";
     String nombre = register.name != null ? register.name : "SIN NOMBRE";
@@ -851,405 +853,23 @@ class _DigitalCredentialScreenState extends State<DigitalCredentialScreen> {
                 )));
     //launch(filePath);
   }
-}
 
-/* class DigitalCredentialScreen extends StatelessWidget {
-  final register register;
-  
-  const DigitalCredentialScreen(this.register, {Key key}) : super(key: key);
+  Future<String> getPublicExternalStorageDirectoryPath() async {
+    Directory directory;
+    if (Platform.isIOS) {
+      // Platform is imported from 'dart:io' package
+      directory = await getApplicationDocumentsDirectory();
+      savePDFFolderName = 'Documentos';
+    } else if (Platform.isAndroid) {
+      directory = Directory('/storage/emulated/0/Download');
+      savePDFFolderName = 'Descargas';
+      if (!await directory.exists()) {
+        directory = await getExternalStorageDirectory();
+        savePDFFolderName = directory.path;
+      }
 
-  @override
-  Widget build(BuildContext context) {
-    GlobalKey key1;
-    GlobalKey key2;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("MI CREDENCIAL"),
-        centerTitle: true,
-        backgroundColor: AppColors.morenaLightColor,
-      ),
-      floatingActionButton: FloatingActionButton.small(
-          backgroundColor: AppColors.morenaColor,
-          child: Icon(Icons.download),
-          onPressed: () {}),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Center(
-          child: Column(children: <Widget>[
-            WidgetToImage(
-              builder: (key) => Card(
-                /* semanticContainer: true,
-                clipBehavior: Clip.antiAliasWithSaveLayer, */
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                elevation: 10,
-                child: Container(
-                  height: 490,
-                  width: 310,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        alignment: Alignment.topCenter,
-                        image: AssetImage('assets/img/credencial/anverso.png')),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 128),
-                      _cintillaFoto(),
-                      _cintillaBlanca(),
-                      _cintillaNombre(),
-                      _cintillaEspecialidad(),
-                      _cintillaNumeroControl(),
-                      /* Container(
-                        width: double.infinity,
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              //color: AppColors.morenaColor,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10))),
-                          width: double.infinity,
-                          child: Text("hola 1"),
-                        ), 
-                      )*/
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              elevation: 10,
-              child: Container(
-                height: 490,
-                width: 310,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter,
-                      image: AssetImage('assets/img/credencial/reverso.png')),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    _cintillaTurno(),
-                    _espacioQR(),
-                    _firmaAlumno(),
-                    _fotoReverso()
-                  ],
-                ),
-              ),
-            ),
-          ]),
-        ),
-      )),
-    );
-  }
-
-  Widget _cintillaFoto() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 174,
-          width: 81,
-          /* child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text("IDBIO"),
-                              Text("IDBIO"),
-                            ],
-                          ), */
-        ),
-        Container(
-          height: 174,
-          width: 148,
-          child: Image.network(
-            'https://drive.google.com/uc?export=view&id=${register.fotoUsuarioDrive}',
-            alignment: Alignment.center,
-            fit: BoxFit.fill,
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 80,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 30),
-              width: 80,
-              child: Text(
-                register.grupo != null ? register.grupo : "",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Text(
-              "GRUPO",
-              style: TextStyle(color: Colors.white),
-            )
-          ],
-        )
-      ],
-    );
-  }
-
-  Widget _cintillaBlanca() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          width: 70,
-          //color: Colors.red,
-          child: Column(
-            children: [
-              Text(
-                register.idbio.toString() != null
-                    ? register.idbio.toString()
-                    : "-",
-                style: TextStyle(color: AppColors.textoRojoCredencial),
-              ),
-              Text(
-                "IDBIO",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textoRojoCredencial),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: 170,
-          //color: Colors.blue,
-          child: Column(
-            children: [
-              Text(
-                register.id != null ? register.id : '-',
-                style: TextStyle(color: AppColors.textoRojoCredencial),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "ALUMNO",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textoRojoCredencial),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: 70,
-          //color: Colors.green,
-          child: Column(
-            children: [
-              Text(
-                register.grado != null ? register.grado : "-",
-                style: TextStyle(color: AppColors.textoRojoCredencial),
-              ),
-              Text(
-                "SEMESTRE",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textoRojoCredencial),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _cintillaNombre() {
-    return Container(
-      height: 60,
-      width: double.infinity,
-      //color: Colors.blueGrey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: 30,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(register.nombre != null ? register.nombre : "-",
-                  style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-            ),
-          ),
-          Container(
-            height: 30,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(register.apellidos != null ? register.apellidos : "-",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _cintillaEspecialidad() {
-    return Container(
-      height: 40,
-      width: double.infinity,
-      //color: Colors.amber,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: 20,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text("ESPECIALIDAD",
-                  style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textoRojoCredencial)),
-            ),
-          ),
-          Container(
-            height: 20,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(register.carrera != null ? register.carrera : "-",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textoRojoCredencial)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _cintillaNumeroControl() {
-    return Container(
-      height: 35,
-      child: Column(
-        children: <Widget>[
-          Text(
-            'No. CONTROL   ${register.matricula != "" ? register.matricula : "NO CAPTURADO"}',
-            style: TextStyle(color: AppColors.textoRojoCredencial),
-          ),
-          Image.asset(
-            'assets/img/credencial/barcode.PNG',
-            fit: BoxFit.fitWidth,
-            width: double.infinity,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _cintillaTurno() {
-    return Container(
-      margin: EdgeInsets.only(top: 50),
-      padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-      //color: Colors.red,
-      height: 30,
-      width: double.infinity,
-      child: Text(
-        register.turno != null ? register.turno : "-",
-        textAlign: TextAlign.right,
-        style: TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-      ),
-    );
-  }
-
-  Widget _espacioQR() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          width: 150,
-          height: 150,
-          //color: Colors.amber,
-        ),
-        Container(
-          width: 150,
-          height: 150,
-          //color: Colors.redAccent,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 35,
-              ),
-              Image.network(
-                'https://drive.google.com/uc?export=view&id=${register.qrDrive}',
-                height: 110,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _firmaAlumno() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          width: 100,
-          height: 90,
-          //color: Colors.amber,
-        ),
-        Container(
-          width: 200,
-          height: 60,
-          margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-          //color: Colors.redAccent,
-          child: Image.network(
-            'https://drive.google.com/uc?export=view&id=${register.firmaDrive}',
-            height: 50,
-            //fit: BoxFit.fitHeight,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _fotoReverso() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.all(0),
-          //color: Colors.green,
-          height: 90,
-          width: 80,
-          child: Image.network(
-            'https://drive.google.com/uc?export=view&id=${register.fotoUsuarioDrive}',
-            color: const Color.fromRGBO(255, 255, 255, 0.5),
-            colorBlendMode: BlendMode.modulate,
-            alignment: Alignment.center,
-            fit: BoxFit.fill,
-          ),
-        )
-      ],
-    );
+      //directory = await getExternalStorageDirectory();
+    }
+    return directory.path;
   }
 }
- */

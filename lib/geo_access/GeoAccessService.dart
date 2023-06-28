@@ -20,7 +20,7 @@ class GeoAccessService {
     Geofence.startListening(GeolocationEvent.exit, (entry) {
       LocalNotificationsService()
           .showNotification(entry.hashCode, "Salida", "Estás saliendo");
-      MessagingService().addNotification("333333333333333333", Notification());
+      //MessagingService().addNotification("333333333333333333", Notification());
     });
   }
 }
