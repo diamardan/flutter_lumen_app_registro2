@@ -6,7 +6,7 @@ import 'package:lumen_app_registro/src/utils/net_util.dart';
 
 class TurnosService {
   getAll() async {
-    String endpoint = AppConstants.backendUrl + '/turnos/getAll';
+    String endpoint = AppConstants.backendBaseUrl + '/turns';
     Uri uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
@@ -19,7 +19,6 @@ class TurnosService {
       throw FetchDataException('No Internet connection');
     }
     print("\nmi respuesta es $responseJson   \n la url es $endpoint");
-    print(responseJson);
     return responseJson;
   }
 }

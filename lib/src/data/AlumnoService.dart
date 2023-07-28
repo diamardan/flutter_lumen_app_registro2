@@ -11,14 +11,15 @@ import 'package:path/path.dart' as path;
 
 class AlumnoService {
   checkCurp(String curpAlumno) async {
-    String endpoint = AppConstants.backendUrl + '/preregistros/checkCurp';
+    String endpoint =
+        AppConstants.backendBaseUrl + '/preregistrations/verify-curp';
     var uri = Uri.parse(endpoint);
+    print(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
     };
     String json = jsonEncode(<String, String>{
       "curp": curpAlumno,
-      "schoolName": AppConstants.fsCollectionName
     });
     http.Response response = await http.post(uri, headers: headers, body: json);
     //  int statusCode = response.statusCode;
@@ -27,8 +28,11 @@ class AlumnoService {
     return jsonDecode(data);
   }
 
-  finish(Map<String, dynamic> alumno, File voucher, File foto, firma) async {
-    String url = AppConstants.backendUrl + '/preregistros/finish';
+  finish(Map<String, dynamic> alumno, File voucher, File foto, firma,
+      bool existe) async {
+    String url = AppConstants.backendBaseUrl + '/preregistrations';
+    existe ? url = url + '/${alumno['id']}' : url = url;
+    print(alumno['id']);
     final dir = await getTemporaryDirectory();
     await dir.create(recursive: true);
     final imgFirma = File(path.join(dir.path,
@@ -36,50 +40,52 @@ class AlumnoService {
     await imgFirma.writeAsBytes(
         firma.buffer.asUint8List(firma.offsetInBytes, firma.lengthInBytes));
     final endpoint = Uri.parse(url);
-    final fotoMime = mime(foto.path).split('/');
-    final voucherMime = mime(foto.path).split('/');
     // final firmaMime = mime(imgFirma.path).split('/');
 
-    var request = http.MultipartRequest('POST', endpoint)
-      ..fields["nombres"] = alumno['nombres']
-      ..fields["apellidos"] = alumno['apellidos']
+    var request = http.MultipartRequest(existe ? 'PATCH' : 'POST', endpoint)
+      ..fields["names"] = alumno['names']
+      ..fields["surnames"] = alumno['surnames']
       ..fields["curp"] = alumno['curp']
-      ..fields["correo"] = alumno['correo']
-      ..fields["celular"] = alumno['celular']
-      ..fields["carrera"] = alumno['carrera']
-      ..fields["grado"] = alumno['grado']
-      ..fields["grupo"] = alumno['grupo']
-      ..fields["turno"] = alumno['turno']
-      ..fields["matricula"] = alumno['matricula']
-      ..fields["sexo"] = alumno['sexo']
-      ..fields["tipo_registro"] = "APP"
-      ..fields["escuela"] = AppConstants.fsCollectionName;
+      ..fields["email"] = alumno['email']
+      ..fields["cellphone"] = alumno['cellphone']
+      ..fields["career"] = alumno['career']
+      ..fields["grade"] = alumno['grade']
+      ..fields["group"] = alumno['group']
+      ..fields["turn"] = alumno['turn']
+      ..fields["registration_number"] = alumno['registration_number']
+      /* ..fields["sex"] = alumno['sex'] */
+      ..fields["registration_type"] = "APP";
+    /* ..fields["school"] = AppConstants.fsCollectionName; */
 
     if (foto != null) {
-      request.files.add(await http.MultipartFile.fromPath('foto', foto.path,
+      final fotoMime = mime(foto.path).split('/');
+
+      request.files.add(await http.MultipartFile.fromPath(
+          'student_photo', foto.path,
           contentType: MediaType(fotoMime[0], fotoMime[1]), filename: "FOTO"));
     }
     if (voucher != null) {
+      final voucherMime = mime(voucher.path).split('/');
+
       request.files.add(await http.MultipartFile.fromPath(
-          'voucher', voucher.path,
+          'student_voucher', voucher.path,
           contentType: MediaType(voucherMime[0], voucherMime[1]),
           filename: "FOTO"));
     }
     if (firma != null) {
-      request.files
-          .add(await http.MultipartFile.fromPath('firma', imgFirma.path,
+      request.files.add(
+          await http.MultipartFile.fromPath('student_signature', imgFirma.path,
               contentType: MediaType('image', 'jpg'),
               /* MediaType(firmaMime[0], firmaMime[1] )*/
               filename: "FIRMA"));
     }
-
-    var responseJson;
-
     try {
+      var responseJson;
+
       final streamResponse = await request.send();
       final response = await http.Response.fromStream(streamResponse);
-      responseJson = returnResponse(response);
-      return responseJson;
+      //responseJson = returnResponse(response);
+      return returnResponse(response);
     } on SocketException {
       throw FetchDataException("No internet Connection");
     }

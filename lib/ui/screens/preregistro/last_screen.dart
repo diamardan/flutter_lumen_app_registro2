@@ -1,3 +1,4 @@
+import 'package:lumen_app_registro/ui/res/colors.dart';
 import 'package:lumen_app_registro/ui/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class LastScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "Las instrucciones para recoger su credencial se han enviado al correo registrado.",
+                  "Tu preregistro se realizó con éxito",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
@@ -48,7 +49,7 @@ class LastScreen extends StatelessWidget {
                   child: MaterialButton(
                 minWidth: 200.0,
                 height: 35,
-                color: Color(0xFF801E48),
+                color: AppColors.primary,
                 child: new Text('Salir',
                     style: new TextStyle(fontSize: 16.0, color: Colors.white)),
                 onPressed: () {
@@ -73,7 +74,7 @@ class LastScreen extends StatelessWidget {
       children: <Widget>[
         Container(
           height: size.height * .3,
-          child: Image.asset('assets/img/cetis32logo.png'),
+          child: Image.asset('assets/img/logo-3.png'),
         )
       ],
     );

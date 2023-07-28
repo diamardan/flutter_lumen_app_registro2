@@ -5,7 +5,7 @@ import 'package:lumen_app_registro/src/utils/net_util.dart';
 
 class GruposService {
   getAll() async {
-    String endpoint = AppConstants.backendUrl + 'firebase/grupos/getAll';
+    String endpoint = AppConstants.backendBaseUrl + '/groups';
     var uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
@@ -18,7 +18,6 @@ class GruposService {
       throw FetchDataException('No Internet connection');
     }
     print("\nmi respuesta es $responseJson   \n la url es $endpoint");
-    print(responseJson);
     return responseJson;
   }
 }

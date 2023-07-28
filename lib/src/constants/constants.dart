@@ -1,11 +1,12 @@
 class AppConstants {
   //backendUrl hace referencia ya sea a la url de producción o a la de desarrollo
-  static const backendUrl = 'https://datamex1.com/api/v1/firebase';
-  //static const backendUrl = 'http://192.168.1.79:5001/api/v1/firebase';
-  //static const backendBaseUrl = 'http://192.168.1.79:5001/api/v1/';
-  static const backendBaseUrl = 'https://datamex1.com/api/v1/';
-  static const backendPublicUrl = 'https://datamex1.com/public';
-  //static const backendPublicUrl = 'http://192.168.1.79:5001/public';
+  /* static const backendUrl = 'http://192.168.1.76:3000/api/v2/firebase';
+  static const backendBaseUrl = 'http://192.168.1.76:3000/api/v2';
+  static const backendPublicUrl = 'http://192.168.1.76:3000/public'; */
+
+  static const backendUrl = 'https://lumen.datamex1.com/api/v2/firebase';
+  static const backendBaseUrl = 'https://lumen.datamex1.com/api/v2';
+  static const backendPublicUrl = 'https://lumen.datamex1.com/public';
   static const whatsappNumber = '+5573509107';
   static const supportNumber = '5573509107';
   static const whatsappText = 'Hola me comunico de Lumen';

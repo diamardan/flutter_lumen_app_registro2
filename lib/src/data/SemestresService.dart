@@ -5,7 +5,7 @@ import 'package:lumen_app_registro/src/utils/net_util.dart';
 
 class SemestresService {
   getAll() async {
-    String endpoint = AppConstants.backendUrl + '/semestres/getAll';
+    String endpoint = AppConstants.backendBaseUrl + '/grades';
     var uri = Uri.parse(endpoint);
 
     Map<String, String> headers = {
@@ -19,7 +19,6 @@ class SemestresService {
       throw FetchDataException('No Internet connection');
     }
     print("\nmi respuesta es $responseJson   \n la url es $endpoint");
-    print(responseJson);
     return responseJson;
   }
 }

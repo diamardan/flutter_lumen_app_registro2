@@ -50,10 +50,12 @@ class InvalidInputException extends AppException {
 dynamic returnResponse(http.Response response) {
   switch (response.statusCode) {
     case 200:
+    case 201:
       var responseJson = json.decode(response.body.toString());
       print(responseJson);
       return responseJson;
     case 400:
+      print(response.body);
       throw BadRequestException(response.body.toString());
     case 401:
     case 403:
@@ -61,7 +63,7 @@ dynamic returnResponse(http.Response response) {
     case 500:
     default:
       throw FetchDataException(
-          'Error ocurrido durante la Communicación con el Servidorr con código de estatus : ${response.statusCode}');
+          'Error ocurrido durante la Communicación con el Servidorr con código de estatus : ${response.statusCode} ${response.body}');
   }
 }
 

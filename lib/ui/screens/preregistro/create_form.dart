@@ -12,6 +12,7 @@ import 'package:lumen_app_registro/src/data/SharedService.dart';
 import 'package:lumen_app_registro/src/data/TurnosService.dart';
 import 'package:lumen_app_registro/src/utils/txtFormater.dart';
 import 'package:lumen_app_registro/src/utils/validator.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:signature/signature.dart';
 //import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -39,7 +40,6 @@ class _PreregFormState extends State<PreregForm> {
   final _celularAlumnoController = TextEditingController();
   final _matriculaAlumnoControler = TextEditingController();
 
-  String sexoSeleccionado;
   String especialidadSeleccionada;
   String semestreSeleccionado;
   String grupoSeleccionado;
@@ -58,6 +58,7 @@ class _PreregFormState extends State<PreregForm> {
   bool completed = false;
   bool _loading = true;
   bool isLoading = false;
+  bool _exists = false;
   final ValidatorsLumen validators = new ValidatorsLumen();
   final SignatureController _signController = SignatureController(
     penStrokeWidth: 2,
@@ -92,10 +93,10 @@ class _PreregFormState extends State<PreregForm> {
 
   void _loadSchoolData() async {
     try {
-      var careers = await sharedService.getAll("cat_carreras");
-      var grades = await sharedService.getAll("cat_semestres");
-      var groups = await sharedService.getAll("cat_grupos");
-      var turns = await sharedService.getAll("cat_turnos");
+      var careers = await especialidadesService.getAll();
+      var grades = await semestresService.getAll();
+      var groups = await gruposService.getAll();
+      var turns = await turnosService.getAll();
 
       setState(() {
         _especialidades = careers;
@@ -150,47 +151,39 @@ class _PreregFormState extends State<PreregForm> {
       bool avanza = false;
       Map<String, dynamic> result;
 
-      print('voy a validar');
-      try {
-        result = await alumnoService.checkCurp(_curpAlumnoController.text);
-      } catch (error) {
-        print('estoy en catch');
-        print(error);
-      }
+      result = await alumnoService.checkCurp(_curpAlumnoController.text);
 
-      /* if (result['message'] == "SUCCESS") {
-        showAlertDialog(context, "Error",
-            "Ocurrió un error al conectarse al servidor", "error");
-        return avanza;
-      } */
+      print('mi result es ${result['data']} ');
 
-      if (result['code'] == 201) {
-        return avanza;
-      }
-      if (result['code'] == 200) {
+      if (result.containsKey('data') && result['data'] != null) {
+        _exists = true;
+        print(result['data']);
         alumno = result['data'];
         setState(() {
-          _nombreAlumnoController.text = alumno['nombres'];
-          _apellidosAlumnoController.text = alumno['apellidos'];
-          /* alumno[0]['FOTO_USUARIO'] != null ? foto1 = "${AppConstants.backendPublicUrl}/uploads/preregistro/fotos/${alumno[0]['FOTO_USUARIO']}"
-        : foto1 = ""; */
+          _exists = true;
+          _nombreAlumnoController.text = alumno['names'];
+          _apellidosAlumnoController.text = alumno['surnames'];
+          _correoAlumnoController.text = alumno['email'];
+          _celularAlumnoController.text = alumno['cellphone'];
         });
         if (alumno.length >= 1) {
+          print("alumno mayor a 1");
+          avanza = true;
+        }
+      } else {
+        if (result['code'] == 200 &&
+            result.containsKey('required') &&
+            !result['required']) {
+          _exists = false;
+          print('req false');
           avanza = true;
         }
       }
-      /* else {
-      showAlertDialog(
-          context, "Error", "Ocurrió un error al conectarse al servidor");
-    } */
-      print('misVotos: $result');
-      /*  setState(() {
-      _currentStep = result['data'] == 'SUCCESS' ? step : step - 1;
-      _loading = false;
-    }); */
+      setState(() {});
+      print('mi exists es ${_exists}');
       return avanza;
     } catch (e) {
-      print("error en validación de curp");
+      print("error en validación de curp ${e}");
       showAlertDialog(context, "error", e.toString());
       return false;
     }
@@ -245,7 +238,7 @@ class _PreregFormState extends State<PreregForm> {
           avanzar = true;
         }
         break;
-      case 4:
+      /* case 4:
         {
           if (voucher1 == "") {
             title = "Sin foto";
@@ -256,8 +249,8 @@ class _PreregFormState extends State<PreregForm> {
             avanzar = true;
           }
         }
-        break;
-      case 5:
+        break; */
+      /* case 4:
         {
           if (foto1 == "") {
             title = "Sin foto";
@@ -268,8 +261,8 @@ class _PreregFormState extends State<PreregForm> {
             avanzar = true;
           }
         }
-        break;
-      case 6:
+        break; */
+      case 3:
         {
           bool hayFirma = await procesarFirma();
           if (!hayFirma) {
@@ -304,38 +297,53 @@ class _PreregFormState extends State<PreregForm> {
     setState(() {
       _loading = true;
     });
-    Map<String, dynamic> _alumno = {};
-    _alumno['nombres'] = _nombreAlumnoController.text;
-    _alumno['apellidos'] = _apellidosAlumnoController.text;
-    _alumno['curp'] = _curpAlumnoController.text;
-    _alumno['correo'] = _correoAlumnoController.text;
-    _alumno['celular'] = _celularAlumnoController.text;
-    _alumno['matricula'] = _matriculaAlumnoControler.text;
-    _alumno['carrera'] = especialidadSeleccionada;
-    _alumno['grado'] = semestreSeleccionado;
-    _alumno['grupo'] = grupoSeleccionado;
-    _alumno['turno'] = turnoSeleccionado;
-    _alumno['sexo'] = sexoSeleccionado;
+    print(_exists);
+    try {
+      Map<String, dynamic> _alumno = {};
+      _alumno['names'] = _nombreAlumnoController.text;
+      _alumno['surnames'] = _apellidosAlumnoController.text;
+      _alumno['curp'] = _curpAlumnoController.text;
+      _alumno['email'] = _correoAlumnoController.text;
+      _alumno['cellphone'] = _celularAlumnoController.text;
+      _alumno['registration_number'] = _matriculaAlumnoControler.text;
+      _alumno['career'] = especialidadSeleccionada;
+      _alumno['grade'] = semestreSeleccionado;
+      _alumno['group'] = grupoSeleccionado;
+      _alumno['turn'] = turnoSeleccionado;
+      if (_exists) {
+        _alumno['id'] = alumno['id'];
+      }
+      var firma = await _signController.toPngBytes();
+      var data = Image.memory(firma);
 
-    var firma = await _signController.toPngBytes();
-    var data = Image.memory(firma);
-
-    final finishStep =
-        await alumnoService.finish(_alumno, voucher, foto, firma);
-    final resultMessage = finishStep['message'];
-    final resultCode = finishStep['code'];
-    if (resultCode == 200) {
+      final finishStep =
+          await alumnoService.finish(_alumno, voucher, foto, firma, _exists);
+      final resultMessage = finishStep['message'];
+      final resultCode = finishStep['code'];
+      if (resultCode == 200) {
+        setState(() {
+          _loading = false;
+          lastScreen(context);
+        });
+      } else {
+        setState(() {
+          _loading = false;
+        });
+        final errorHttp = finishStep['data'];
+        showAlertDialog(context, "Error",
+            "Ocurrió un error al conectarse al servidor, $errorHttp", "error");
+      }
+    } catch (e) {
       setState(() {
         _loading = false;
-        lastScreen(context);
       });
-    } else {
-      setState(() {
-        _loading = false;
-      });
-      final errorHttp = finishStep['data'];
-      showAlertDialog(context, "Error",
-          "Ocurrió un error al conectarse al servidor, $errorHttp", "error");
+      // Manejar la excepción y mostrar un mensaje de error si es necesario
+      print('Error en la operación de registro: $e');
+      showAlertDialog(
+          context,
+          "Error",
+          'Ocurrió un error durante el registro. Por favor, inténtelo nuevamente. /n ${e}',
+          "error");
     }
   }
 
@@ -360,43 +368,46 @@ class _PreregFormState extends State<PreregForm> {
   }
 
   Widget myStepper() {
-    return Stepper(
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                //  height: 60,
-                width: 200,
-                child: ElevatedButton(
-                  //color: AppColors.morenaColor,
-                  onPressed: details.onStepContinue,
-                  child: const Text(
-                    'Continuar',
-                    style: TextStyle(color: Colors.white),
+    return FractionallySizedBox(
+      widthFactor: 1.02, // Ajusta este valor según sea necesario
+      child: Stepper(
+          controlsBuilder: (BuildContext context, ControlsDetails details) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  //  height: 60,
+                  width: 200,
+                  child: ElevatedButton(
+                    //color: AppColors.morenaColor,
+                    onPressed: details.onStepContinue,
+                    child: const Text(
+                      'Continuar',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-              MaterialButton(
-                onPressed: details.onStepCancel,
-                child: const Text('Atrás'),
-              ),
-            ],
-          );
-        },
-        type: StepperType.horizontal,
-        physics: ClampingScrollPhysics(),
-        currentStep: _currentStep,
-        onStepContinue: () {
-          next();
-        },
-        onStepCancel: () {
-          cancel();
-        },
-        steps: _mySteps());
+                MaterialButton(
+                  onPressed: details.onStepCancel,
+                  child: const Text('Atrás'),
+                ),
+              ],
+            );
+          },
+          type: StepperType.horizontal,
+          physics: ClampingScrollPhysics(),
+          currentStep: _currentStep,
+          onStepContinue: () {
+            next();
+          },
+          onStepCancel: () {
+            cancel();
+          },
+          steps: _mySteps()),
+    );
   }
 
   List<Step> _mySteps() {
@@ -404,8 +415,8 @@ class _PreregFormState extends State<PreregForm> {
       _validarCurp(),
       _datosAlumno(),
       _datosEscuela(),
-      _voucher(),
-      _foto(),
+      //_voucher(),
+      /* _foto(), */
       _firma()
     ];
     return _steps;
@@ -439,6 +450,7 @@ class _PreregFormState extends State<PreregForm> {
 
   Step _datosAlumno() {
     return Step(
+      isActive: _currentStep >= 1,
       title: new Text(_currentStep == 1 ? "Datos del alumno" : ''),
       content: SingleChildScrollView(
         child: Form(
@@ -450,34 +462,15 @@ class _PreregFormState extends State<PreregForm> {
                 inputFormatters: [TextoMayusculas()],
                 controller: _nombreAlumnoController,
                 decoration: InputDecoration(labelText: 'Nombre'),
-                enabled: false,
+                enabled: true,
               ),
               TextFormField(
                 validator: (value) => validators.notEmptyField(value),
                 inputFormatters: [TextoMayusculas()],
                 controller: _apellidosAlumnoController,
                 decoration: InputDecoration(labelText: 'Apellidos'),
-                enabled: false,
+                enabled: true,
               ),
-              DropdownButtonFormField(
-                  isExpanded: true,
-                  validator: (value) => validators.selectSelected(value),
-                  hint: Text("Seleccione un Sexo"),
-                  onChanged: (newValue) {
-                    setState(() {
-                      sexoSeleccionado = newValue;
-                    });
-                  },
-                  items: [
-                    DropdownMenuItem(
-                      value: "H",
-                      child: Text("HOMBRE"),
-                    ),
-                    DropdownMenuItem(
-                      value: "M",
-                      child: Text("MUJER"),
-                    ),
-                  ]),
               TextFormField(
                 validator: (value) =>
                     validators.validateEmail(value), //notEmptyField(value),
@@ -501,7 +494,6 @@ class _PreregFormState extends State<PreregForm> {
           ),
         ),
       ),
-      isActive: _currentStep >= 1,
       state: StepState.complete,
     );
   }
@@ -509,6 +501,7 @@ class _PreregFormState extends State<PreregForm> {
   Step _datosEscuela() {
     Size size = MediaQuery.of(context).size;
     return Step(
+      isActive: _currentStep >= 2,
       title: new Text(_currentStep == 2 ? "Datos de la escuela" : ''),
       content: SingleChildScrollView(
         child: Form(
@@ -533,8 +526,8 @@ class _PreregFormState extends State<PreregForm> {
                 },
                 items: _especialidades.map((especialidadItem) {
                   return DropdownMenuItem(
-                      value: especialidadItem['carrera'],
-                      child: Text(especialidadItem['carrera']));
+                      value: especialidadItem['id'],
+                      child: Text(especialidadItem['name']));
                 }).toList(),
               ),
               Container(
@@ -549,8 +542,8 @@ class _PreregFormState extends State<PreregForm> {
                   },
                   items: _semestres.map((semestreItem) {
                     return DropdownMenuItem(
-                        value: semestreItem['semestre'],
-                        child: Text(semestreItem['semestre']));
+                        value: semestreItem['id'],
+                        child: Text(semestreItem['name']));
                   }).toList(),
                 ),
               ),
@@ -566,8 +559,7 @@ class _PreregFormState extends State<PreregForm> {
                   },
                   items: _grupos.map((grupoItem) {
                     return DropdownMenuItem(
-                        value: grupoItem['grupo'],
-                        child: Text(grupoItem['grupo']));
+                        value: grupoItem['id'], child: Text(grupoItem['name']));
                   }).toList(),
                 ),
               ),
@@ -583,8 +575,7 @@ class _PreregFormState extends State<PreregForm> {
                   },
                   items: _turnos.map((turnoItem) {
                     return DropdownMenuItem(
-                        value: turnoItem['turno'],
-                        child: Text(turnoItem['turno']));
+                        value: turnoItem['id'], child: Text(turnoItem['name']));
                   }).toList(),
                 ),
               ),
@@ -595,12 +586,11 @@ class _PreregFormState extends State<PreregForm> {
           ),
         ),
       ),
-      isActive: _currentStep >= 2,
       state: StepState.complete,
     );
   }
 
-  Step _voucher() {
+  /* Step _voucher() {
     return Step(
         isActive: _currentStep >= 3,
         state: StepState.complete,
@@ -648,14 +638,14 @@ class _PreregFormState extends State<PreregForm> {
           ),
         ));
   }
-
-  Step _foto() {
+ */
+  /*  Step _foto() {
     return Step(
-        isActive: _currentStep >= 4,
+        isActive: _currentStep >= 3,
         state: StepState.complete,
-        title: Text(_currentStep == 4 ? "Fotografía" : ''),
+        title: Text(_currentStep == 3 ? "Fotografía" : ''),
         content: Form(
-          key: formKeys[4],
+          key: formKeys[3],
           child: Stack(
             children: <Widget>[
               _mostrarFoto(),
@@ -667,15 +657,11 @@ class _PreregFormState extends State<PreregForm> {
                     padding: EdgeInsets.all(0),
                     minWidth: 10,
                     onPressed: () {
-                      /* showMaterialModalBottomSheet(
+                      showMaterialModalBottomSheet(
                         expand: false,
                         context: context,
                         builder: (_) => _loadImageOptions("photo"),
-                      ); */
-                      /* _tomarFoto(); */
-                      /* setState(() {
-                        _loading = true;
-                      }); */
+                      );
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(22)),
@@ -696,14 +682,15 @@ class _PreregFormState extends State<PreregForm> {
           ),
         ));
   }
+ */
 
   Step _firma() {
     return Step(
-        isActive: _currentStep >= 5,
+        isActive: _currentStep >= 3,
         state: StepState.complete,
-        title: Text(_currentStep == 5 ? "Firma" : ''),
+        title: Text(_currentStep == 3 ? "Firma" : ''),
         content: Form(
-          key: formKeys[5],
+          key: formKeys[3],
           child: ListView(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,

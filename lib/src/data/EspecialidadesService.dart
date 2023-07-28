@@ -5,7 +5,7 @@ import 'package:lumen_app_registro/src/utils/net_util.dart';
 
 class EspecialidadesService {
   getAll() async {
-    String endpoint = AppConstants.backendUrl + '/especialidades/getAll';
+    String endpoint = AppConstants.backendBaseUrl + '/careers';
     var uri = Uri.parse(endpoint);
     Map<String, String> headers = {
       "Content-type": "application/json; charset=UTF-8"
@@ -18,7 +18,6 @@ class EspecialidadesService {
       throw FetchDataException('No Internet connection');
     }
     print("\nmi respuesta es $responseJson   \n la url es $endpoint");
-    print(responseJson);
     return responseJson;
   }
 }

@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _botonRegistro(BuildContext context) {
     return Container(
         height: 50,
-        width: 230,
+        width: MediaQuery.of(context).size.width,
         child: TextButton.icon(
           onPressed: () {
             Navigator.push(
@@ -154,16 +154,20 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           style: TextButton.styleFrom(
             //  elevation: 1,
-            primary: AppColors.primary,
+            backgroundColor: AppColors.secondary,
 
-            /*shape: RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
                 // side: BorderSide(color: AppColors.primary.withOpacity(0.5)),
-                borderRadius: BorderRadius.circular(50)),*/
+                borderRadius: BorderRadius.circular(50)),
           ),
-          icon: Icon(Icons.app_registration),
+          icon: Icon(
+            Icons.app_registration,
+            color: Colors.black,
+          ),
           label: Text(
-            "Ir a Registro",
+            "Preregistro",
             textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black),
           ),
         ));
   }
@@ -267,7 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 10,
               ),
-              //_botonRegistro(context),
+              _botonRegistro(context),
               Expanded(
                   child: Column(
                 mainAxisSize: MainAxisSize.min,
